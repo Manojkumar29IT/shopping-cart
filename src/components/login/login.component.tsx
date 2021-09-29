@@ -1,5 +1,6 @@
 import React, { Component, useState } from "react";
 import OAuthLogin from "./login.google";
+import axios from "axios";
 
 export interface LoginProps {
     isOnDashboard: CallableFunction,
@@ -7,12 +8,18 @@ export interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({ isOnDashboard, setLoginType }) => {
-
     const handleSubmit = (event: any): any => {
+        event.preventDefault();
         const email = event.target.elements.email.value;
         const password = event.target.elements.password.value;
         console.log({ email: email, password: password });
-        isOnDashboard();
+        axios.post('http://localhost:4000/login', {
+            email: email,
+            password: password
+        }).then(resp => {
+            console.log(resp);
+            isOnDashboard();
+        });
     }
 
     return (

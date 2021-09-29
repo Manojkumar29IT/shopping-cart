@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import { useEffect, useState } from 'react';
-const axios = require('axios');
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
