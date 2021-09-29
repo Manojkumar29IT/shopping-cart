@@ -3,9 +3,10 @@ import OAuthLogin from "./login.google";
 
 export interface LoginProps {
     isOnDashboard: CallableFunction,
+    setLoginType: CallableFunction
 }
 
-const Login: React.FC<LoginProps> = ({ isOnDashboard }) => {
+const Login: React.FC<LoginProps> = ({ isOnDashboard, setLoginType }) => {
 
     const handleSubmit = (event: any): any => {
         const email = event.target.elements.email.value;
@@ -45,7 +46,9 @@ const Login: React.FC<LoginProps> = ({ isOnDashboard }) => {
                 <p className="divider-text">OR</p>
                 <hr className="ruler-margin" />
                 <div className="google-login-container">
-                    <OAuthLogin isOnDashboard={isOnDashboard} />
+                    <OAuthLogin
+                        isOnDashboard={isOnDashboard}
+                        setLoginType={setLoginType} />
                 </div>
             </div>
         </div>

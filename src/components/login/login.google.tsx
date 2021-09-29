@@ -6,12 +6,14 @@ const clientId =
     '713100788835-kutdjmmb48vhkpgm7li7kev41rrlo8a3.apps.googleusercontent.com';
 
 export interface OAuthLoginProps {
-    isOnDashboard: CallableFunction
+    isOnDashboard: CallableFunction,
+    setLoginType: CallableFunction
 }
 
-const OAuthLogin: React.FC<OAuthLoginProps> = ({ isOnDashboard }) => {
+const OAuthLogin: React.FC<OAuthLoginProps> = ({ isOnDashboard, setLoginType }) => {
     const onSuccess = (res: any) => {
         isOnDashboard();
+        setLoginType('OAuth');
         refreshTokenSetup(res);
     };
 

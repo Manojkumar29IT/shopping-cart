@@ -5,11 +5,13 @@ const clientId =
 
 export interface OAuthLogoutProps {
     isOnDashboard: CallableFunction
+    setLoginType: CallableFunction
 }
 
-const OAuthLogout: React.FC<OAuthLogoutProps> = ({ isOnDashboard }) => {
+const OAuthLogout: React.FC<OAuthLogoutProps> = ({ isOnDashboard, setLoginType }) => {
     const onSuccess = () => {
         console.log('Logout made successfully');
+        setLoginType('');
         isOnDashboard(false);
     };
 

@@ -13,6 +13,7 @@ export interface AppProps {
 
 const App: React.FC<AppProps> = () => {
   const [isDashboard, setIsDashboard] = useState(false);
+  const [isOAuthLogin, setIsOAuthLogin] = useState(false);
 
   const isOnDashboard = (props: boolean): void => {
     if (props === false) {
@@ -22,12 +23,20 @@ const App: React.FC<AppProps> = () => {
       setIsDashboard(true);
     }
   }
+  const setLoginType = (props: string): void => {
+    if (props === 'OAuth') {
+      setIsOAuthLogin(true);
+    }
+    else {
+      setIsOAuthLogin(false);
+    }
+  }
   return (<Router>
     {!isDashboard && (
       <div className="App">
         <nav className="navbar navbar-expand-lg navbar-light fixed-top">
           <div className="container">
-            <Link className="navbar-brand" to={"/sign-in"}>My Shopping Platform - Happy Shopping !!!</Link>
+            <Link className="navbar-brand" to={"/sign-in"}>Shopping Platform</Link>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
@@ -44,11 +53,13 @@ const App: React.FC<AppProps> = () => {
               <Route exact path='/'>
                 <Login
                   isOnDashboard={isOnDashboard}
+                  setLoginType={setLoginType}
                 />
               </Route>
               <Route path="/sign-in">
                 <Login
                   isOnDashboard={isOnDashboard}
+                  setLoginType={setLoginType}
                 />
               </Route>
               <Route path="/sign-up">
@@ -65,15 +76,21 @@ const App: React.FC<AppProps> = () => {
       <div className="dashbord-warpper">
         <nav className="navbar navbar-expand-lg navbar-light fixed-top">
           <div className="container">
-            <Link className="navbar-brand" to={"/dashboard"}>My Shopping Platform - Happy Shopping !!!</Link>
+            <Link className="navbar-brand" to={"/dashboard"}>Shopping Platform</Link>
             <div className="collapse navbar-collapse" id="navbarTogglerDemo02">
               <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link className="nav-link" to={"/sign-in"} onClick={() => setIsDashboard(false)}>Logout</Link>
-                </li>
-                <li className="nav-item">
-                  <OAuthLogout isOnDashboard={isOnDashboard} />
-                </li>
+                {!isOAuthLogin && (
+                  <li className="nav-item">
+                    <Link className="nav-link" to={"/sign-in"} onClick={() => setIsDashboard(false)}>Logout</Link>
+                  </li>
+                )}
+                {isOAuthLogin && (
+                  <li className="nav-item">
+                    <OAuthLogout
+                      isOnDashboard={isOnDashboard}
+                      setLoginType={setLoginType} />
+                  </li>
+                )}
               </ul>
             </div>
           </div>
