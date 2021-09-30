@@ -1,7 +1,6 @@
 import React, { Component, useState } from "react";
 import OAuthLogin from "./login.google";
 import axios from "axios";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import BlockUi from "react-block-ui";
 import "react-block-ui/style.css";
 
@@ -18,9 +17,13 @@ const Login: React.FC<LoginProps> = ({ isOnDashboard, setLoginType }) => {
         const email = event.target.elements.email.value;
         const password = event.target.elements.password.value;
         console.log({ email: email, password: password });
-        axios.post('http://localhost:4000/login', {
+        axios.post('https://0xkuxx47s6.execute-api.ap-south-1.amazonaws.com/login', {
             email: email,
             password: password
+        }, {
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+            }
         }).then(resp => {
             setIsLoading(false);
             console.log(resp);

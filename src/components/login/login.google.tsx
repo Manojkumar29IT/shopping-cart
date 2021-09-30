@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { GoogleLogin } from 'react-google-login';
 import { refreshTokenSetup } from '../../utils/refreshToken';
 
@@ -19,9 +18,6 @@ const OAuthLogin: React.FC<OAuthLoginProps> = ({ isOnDashboard, setLoginType }) 
 
     const onFailure = (res: any) => {
         console.log('Login failed: res:', res);
-        alert(
-            `Failed to login`
-        );
     };
 
     return (

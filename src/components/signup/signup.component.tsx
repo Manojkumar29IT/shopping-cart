@@ -18,7 +18,7 @@ const SignUp: React.FC<SignUpProps> = ({ isOnDashboard }) => {
         const email = event.target.elements.email.value;
         const password = event.target.elements.password.value;
         console.log({ firstname: firstname, lastname: lastname, email: email, password: password });
-        axios.post('http://localhost:4000/user', {
+        axios.post('https://0xkuxx47s6.execute-api.ap-south-1.amazonaws.com/user', {
             first_name: firstname,
             last_name: lastname,
             email: email,

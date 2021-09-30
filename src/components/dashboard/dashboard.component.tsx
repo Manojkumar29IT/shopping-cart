@@ -49,7 +49,7 @@ const defaultItemData = {
 
 const getItems = async (): Promise<ItemData> => {
   const resp = await axios
-    .get('http://localhost:4000/item', {})
+    .get('https://0xkuxx47s6.execute-api.ap-south-1.amazonaws.com/item', {})
   console.log(resp);
   return resp;
 }
